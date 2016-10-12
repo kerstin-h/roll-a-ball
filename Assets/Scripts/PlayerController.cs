@@ -27,8 +27,31 @@ public class PlayerController : MonoBehaviour {
 	// before physics calculations
 	void FixedUpdate () 
 	{
-		float moveHorizontal = Input.GetAxis ("Horizontal");
-		float moveVertical = Input.GetAxis ("Vertical");
+		// support desktop and mobile
+		bool mobileDevice = true;
+#if UNITY_EDITOR
+		mobileDevice = false;
+#endif
+
+		float moveHorizontal = 0, moveVertical = 0;
+
+		if (!mobileDevice) {
+			
+			moveHorizontal = Input.GetAxis ("Horizontal");
+			moveVertical = Input.GetAxis ("Vertical");
+
+		} else {
+
+			Touch touch = Input.GetTouch (0);
+
+			if (touch.phase == TouchPhase.Moved) {
+
+				moveHorizontal = touch.deltaPosition.x;
+				moveVertical = touch.deltaPosition.y;
+			}
+		}
+
+		Debug.Log ("Detected touch movement of (" + moveHorizontal + ", " + moveVertical + ")");
 
 		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 
