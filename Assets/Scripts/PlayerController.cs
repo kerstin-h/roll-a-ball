@@ -50,7 +50,18 @@ public class PlayerController : MonoBehaviour {
 					moveHorizontal = touch.deltaPosition.x;
 					moveVertical = touch.deltaPosition.y;
 
+					// this is too fast and too far, all we really want is direction
+					if (moveHorizontal > 1) 
+						moveHorizontal = 1;
+					if (moveHorizontal < -1)
+						moveHorizontal = -1;
 
+					if (moveVertical > 1) 
+						moveVertical = 1;
+					if (moveVertical < -1)
+						moveVertical = -1;
+
+					speed = 10;
 				}
 			}
 		}
