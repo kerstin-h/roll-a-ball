@@ -42,12 +42,14 @@ public class PlayerController : MonoBehaviour {
 
 		} else {
 
-			Touch touch = Input.GetTouch (0);
+			if (Input.touchCount > 0) {
+				Touch touch = Input.GetTouch (0);
 
-			if (touch.phase == TouchPhase.Moved) {
+				if (touch.phase == TouchPhase.Moved) {
 
-				moveHorizontal = touch.deltaPosition.x;
-				moveVertical = touch.deltaPosition.y;
+					moveHorizontal = touch.deltaPosition.x;
+					moveVertical = touch.deltaPosition.y;
+				}
 			}
 		}
 
