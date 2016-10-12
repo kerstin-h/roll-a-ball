@@ -40,9 +40,6 @@ public class PlayerController : MonoBehaviour {
 			moveHorizontal = Input.GetAxis ("Horizontal");
 			moveVertical = Input.GetAxis ("Vertical");
 
-			if ((moveHorizontal == 0) && (moveVertical == 0))
-				return;
-
 		} else {
 
 			if (Input.touchCount > 0) {
@@ -53,10 +50,14 @@ public class PlayerController : MonoBehaviour {
 					moveHorizontal = touch.deltaPosition.x;
 					moveVertical = touch.deltaPosition.y;
 
-					if ((moveHorizontal == 0) && (moveVertical == 0))
-						return;
+
 				}
 			}
+		}
+
+		// no movement, lets exist
+		if ((moveHorizontal == 0) && (moveVertical == 0)) {
+			return;
 		}
 
 		Debug.Log ("Detected touch movement of (" + moveHorizontal + ", " + moveVertical + ")");
